@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Devika — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --off-white: #F7F6F2;
+    --ink: #1A1A18;
+    --ink-muted: #6B6B65;
+    --ink-faint: #A8A8A2;
+    --accent: #2D5016;
+    --accent-light: #EBF2E4;
+    --border: rgba(26,26,24,0.10);
+    --border-med: rgba(26,26,24,0.18);
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --serif: 'DM Serif Display', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--off-white);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(247,246,242,0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 56px;
+  }
+  .hero-left {
+    padding: 6rem 4rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 28px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 400px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--off-white);
+    border: 1px solid var(--ink);
+  }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border-med);
+  }
+  .btn-secondary:hover { border-color: var(--ink); }
+
+  .hero-right {
+    padding: 6rem 4rem 4rem;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .stat {
+    background: var(--off-white);
+    padding: 1.5rem;
+  }
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+  }
+  .stat-label { font-size: 0.82rem; color: var(--ink-muted); letter-spacing: 0.04em; }
+
+  .hero-contact { display: flex; flex-direction: column; gap: 0.5rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.88rem; color: var(--ink-muted);
+    text-decoration: none;
+  }
+  .contact-item:hover { color: var(--accent); }
+  .contact-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0;
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; border-top: 1px solid var(--border); }
+  .section-header {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-num {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .section-line {
+    flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* EXPERIENCE */
+  .exp-card {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .exp-card:first-child { border-top: none; padding-top: 0; }
+  .exp-meta { }
+  .exp-period {
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 0.4rem;
+  }
+  .exp-company { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .exp-tag {
+    display: inline-block;
+    font-size: 0.72rem; padding: 0.2rem 0.6rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 100px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .exp-content { }
+  .exp-role {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .exp-bullets li {
+    font-size: 0.93rem; color: var(--ink-muted);
+    padding-left: 1rem; position: relative;
+    line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: ''; position: absolute; left: 0; top: 0.65em;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .project-card {
+    background: var(--off-white);
+    padding: 2rem;
+    display: flex; flex-direction: column;
+    transition: background 0.2s;
+  }
+  .project-card:hover { background: #F0EFE9; }
+  .project-index {
+    font-family: var(--serif); font-style: italic;
+    font-size: 0.85rem; color: var(--ink-faint);
+    margin-bottom: 1.5rem;
+  }
+  .project-name {
+    font-family: var(--serif);
+    font-size: 1.3rem; letter-spacing: -0.01em;
+    color: var(--ink); margin-bottom: 0.75rem;
+  }
+  .project-desc {
+    font-size: 0.88rem; color: var(--ink-muted);
+    line-height: 1.65; flex: 1;
+    margin-bottom: 1.5rem;
+  }
+  .project-tech {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  .tech-pill {
+    font-size: 0.72rem; padding: 0.2rem 0.55rem;
+    background: white;
+    border: 1px solid var(--border-med);
+    border-radius: 100px;
+    color: var(--ink-muted);
+  }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.8rem; color: var(--accent);
+    text-decoration: none; font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .project-link:hover { text-decoration: underline; }
+  .arrow { font-size: 0.75rem; }
+
+  /* SKILLS */
+  .skills-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  .skill-group { margin-bottom: 2.5rem; }
+  .skill-group-name {
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 500;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--border-med);
+    border-radius: 100px;
+    color: var(--ink);
+    background: white;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .skill-tag.primary { background: var(--ink); color: var(--off-white); border-color: var(--ink); }
+  .skill-tag.primary:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* CERTIFICATIONS */
+  .certs-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .cert-item {
+    background: var(--off-white);
+    padding: 1.25rem 1.75rem;
+    display: flex; align-items: center; gap: 1.5rem;
+    transition: background 0.15s;
+  }
+  .cert-item:hover { background: #F0EFE9; }
+  .cert-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--accent-light);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .cert-icon svg { width: 16px; height: 16px; stroke: var(--accent); }
+  .cert-name { font-size: 0.93rem; font-weight: 500; color: var(--ink); }
+  .cert-issuer { font-size: 0.82rem; color: var(--ink-faint); margin-top: 0.1rem; }
+
+  /* ABOUT / EDUCATION */
+  .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text { font-size: 1.05rem; color: var(--ink-muted); line-height: 1.85; font-weight: 300; }
+  .about-text p + p { margin-top: 1.25rem; }
+  .about-text strong { color: var(--ink); font-weight: 500; }
+  .edu-card {
+    border: 1px solid var(--border-med);
+    border-radius: 16px; padding: 2rem;
+    background: white;
+  }
+  .edu-degree { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 0.35rem; }
+  .edu-school { font-size: 0.88rem; color: var(--ink-muted); margin-bottom: 1.5rem; line-height: 1.5; }
+  .edu-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .edu-badge {
+    font-size: 0.78rem; padding: 0.25rem 0.75rem;
+    border-radius: 100px; font-weight: 500;
+  }
+  .edu-badge.cgpa { background: var(--accent-light); color: var(--accent); }
+  .edu-badge.year { background: #EEF0F5; color: #4A5568; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-text { font-size: 0.85rem; color: var(--ink-faint); }
+  .footer-name { font-family: var(--serif); font-size: 1rem; color: var(--ink); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 4rem 2rem 2rem; border-right: none; border-bottom: 1px solid var(--border); }
+    .hero-right { padding: 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .exp-card { grid-template-columns: 1fr; gap: 0.75rem; }
+    .skills-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .about-layout { grid-template-columns: 1fr; gap: 2rem; }
+    section { padding: 4rem 2rem; }
+    footer { padding: 2rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    .nav-links { display: none; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero-name { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-ctas { animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-stats { animation: fadeUp 0.6s 0.15s ease both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Devika</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="border-top: none; padding: 0;">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Full Stack Developer</p>
+    <h1 class="hero-name">Building for the<br/><em>web, end to end.</em></h1>
+    <p class="hero-desc">
+      Computer Science undergrad at IIIT Senapati, currently crafting production-grade full-stack features at Inreal Solutions. I work across the MERN stack, Next.js, TypeScript, and beyond.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="mailto:sonidevika080@gmail.com">Get in touch ↗</a>
+      <a class="btn btn-secondary" href="#projects">View my work</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">8.57</div>
+        <div class="stat-label">CGPA, B.Tech CSE</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Live production projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">2026</div>
+        <div class="stat-label">Currently interning</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">MERN</div>
+        <div class="stat-label">Core tech stack</div>
+      </div>
+    </div>
+
+    <div class="hero-contact">
+      <a class="contact-item" href="mailto:sonidevika080@gmail.com">
+        <span class="contact-dot"></span>
+        sonidevika080@gmail.com
+      </a>
+      <a class="contact-item" href="tel:+917630812323">
+        <span class="contact-dot"></span>
+        +91-7630812323
+      </a>
+      <a class="contact-item" href="https://github.com/Yoake83">
+        <span class="contact-dot"></span>
+        GitHub Profile
+      </a>
+      <a class="contact-item" href="https://www.linkedin.com/in/devika-2183s/">
+        <span class="contact-dot"></span>
+        LinkedIn Profile
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-meta">
+      <p class="exp-period">Feb 2026 – May 2026</p>
+      <p class="exp-company">Inreal Solutions</p>
+      <span class="exp-tag">Online · Internship</span>
+    </div>
+    <div class="exp-content">
+      <h3 class="exp-role">Full Stack Developer Intern</h3>
+      <ul class="exp-bullets">
+        <li>Engineered and deployed full-stack features for two live production websites — Chasing Sunshine and Marcstrat — handling both frontend and backend independently.</li>
+        <li>Built end-to-end JWT + Google OAuth authentication system with secure session handling and auto-login functionality.</li>
+        <li>Developed an admin dashboard enabling content managers to control page content and app-wide theming (dark/light mode) without developer intervention.</li>
+        <li>Optimized frontend performance, reducing average page load time from ~3s to under 2s (~40% improvement).</li>
+        <li>Identified and resolved weekly recurring crashes, achieving stable zero-crash production over sustained deployment.</li>
+        <li>Integrated PostHog and Microsoft Clarity for user activity tracking, heatmaps, and behavioral analytics.</li>
+        <li>Built and maintained RESTful APIs using Node.js and Express, with MongoDB for data management.</li>
+        <li>Collaborated in a 3-member cross-functional team, contributing across the full stack from database design to UI delivery.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <p class="project-index">i.</p>
+      <h3 class="project-name">TaskFlow</h3>
+      <p class="project-desc">Full-stack task manager that auto-prioritizes tasks using Greedy algorithms, Priority Queue, and Knapsack DP. Features smart scheduling, procrastination detection, a Pomodoro focus mode, and automated nightly rescheduling.</p>
+      <div class="project-tech">
+        <span class="tech-pill">Next.js 14</span>
+        <span class="tech-pill">TypeScript</span>
+        <span class="tech-pill">Supabase</span>
+        <span class="tech-pill">PostgreSQL</span>
+        <span class="tech-pill">Tailwind CSS</span>
+      </div>
+      <a class="project-link" href="https://github.com/Yoake83/Task_Management_System">GitHub <span class="arrow">↗</span></a>
+    </div>
+
+    <div class="project-card">
+      <p class="project-index">ii.</p>
+      <h3 class="project-name">Collaborative Whiteboard</h3>
+      <p class="project-desc">Real-time collaborative whiteboard platform for seamless team interaction. Implements Clerk authentication, workspace management backed by MongoDB, and an intuitive drawing UI optimized for smooth collaboration.</p>
+      <div class="project-tech">
+        <span class="tech-pill">Next.js 14</span>
+        <span class="tech-pill">TypeScript</span>
+        <span class="tech-pill">MongoDB</span>
+        <span class="tech-pill">Clerk</span>
+        <span class="tech-pill">shadcn/ui</span>
+      </div>
+      <a class="project-link" href="https://github.com/Yoake83/Collaborative-WhiteBoardApp">GitHub <span class="arrow">↗</span></a>
+    </div>
+
+    <div class="project-card">
+      <p class="project-index">iii.</p>
+      <h3 class="project-name">Contact Management System</h3>
+      <p class="project-desc">Full-stack contact management system with secure JWT authentication, role-based access control, and complete CRUD operations via RESTful APIs. Built with the MERN stack from the ground up.</p>
+      <div class="project-tech">
+        <span class="tech-pill">React.js</span>
+        <span class="tech-pill">Node.js</span>
+        <span class="tech-pill">Express.js</span>
+        <span class="tech-pill">MongoDB</span>
+        <span class="tech-pill">Tailwind CSS</span>
+      </div>
+      <a class="project-link" href="https://github.com/Yoake83/Contact-Management-App">GitHub <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="skills-layout">
+    <div>
+      <div class="skill-group">
+        <p class="skill-group-name">Languages</p>
+        <div class="skill-tags">
+          <span class="skill-tag primary">JavaScript</span>
+          <span class="skill-tag primary">TypeScript</span>
+          <span class="skill-tag">C/C++</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Frontend</p>
+        <div class="skill-tags">
+          <span class="skill-tag primary">React.js</span>
+          <span class="skill-tag primary">Next.js 14</span>
+          <span class="skill-tag">Tailwind CSS</span>
+          <span class="skill-tag">shadcn/ui</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Backend</p>
+        <div class="skill-tags">
+          <span class="skill-tag primary">Node.js</span>
+          <span class="skill-tag primary">Express.js</span>
+          <span class="skill-tag">RESTful APIs</span>
+          <span class="skill-tag">JWT</span>
+          <span class="skill-tag">Google OAuth</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="skill-group">
+        <p class="skill-group-name">Databases</p>
+        <div class="skill-tags">
+          <span class="skill-tag primary">MongoDB</span>
+          <span class="skill-tag primary">PostgreSQL</span>
+          <span class="skill-tag">Supabase</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Firebase</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Analytics &amp; Tools</p>
+        <div class="skill-tags">
+          <span class="skill-tag">PostHog</span>
+          <span class="skill-tag">Microsoft Clarity</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Vercel</span>
+          <span class="skill-tag">VSCode</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-name">Coursework</p>
+        <div class="skill-tags">
+          <span class="skill-tag">DSA</span>
+          <span class="skill-tag">Operating Systems</span>
+          <span class="skill-tag">OOP</span>
+          <span class="skill-tag">DBMS</span>
+          <span class="skill-tag">Software Engineering</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT & EDUCATION -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="about-layout">
+    <div class="about-text">
+      <p>I'm Devika, a second-year B.Tech Computer Science student at <strong>IIIT Senapati</strong>, passionate about building things that live on the web. I love working across the full stack — from designing clean APIs to crafting responsive UIs that feel great to use.</p>
+      <p>Currently interning as a Full Stack Developer at <strong>Inreal Solutions</strong>, where I ship features for live production applications, debug real-world issues, and collaborate on cross-functional teams. I care deeply about performance, clean code, and user experience.</p>
+      <p>Outside of work, I build personal projects that let me explore algorithms, real-time systems, and emerging web technologies. I'm particularly interested in <strong>web development</strong> and <strong>cloud security</strong>.</p>
+    </div>
+
+    <div>
+      <div class="edu-card" style="margin-bottom: 2rem;">
+        <h3 class="edu-degree">B.Tech in Computer Science &amp; Engineering</h3>
+        <p class="edu-school">Indian Institute of Information Technology, Senapati</p>
+        <div class="edu-meta">
+          <span class="edu-badge cgpa">CGPA: 8.57</span>
+          <span class="edu-badge year">2023 – 2027</span>
+        </div>
+      </div>
+
+      <p style="font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; margin-bottom: 1rem;">Certifications</p>
+      <div class="certs-list">
+        <div class="cert-item">
+          <div class="cert-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-2 5L9 18l-5 2 2-5L3 12l5-2 1 2 3-2 1 3z"/><circle cx="16" cy="8" r="4"/></svg>
+          </div>
+          <div>
+            <p class="cert-name">Graphs Completion Certificate</p>
+            <p class="cert-issuer">Algo University</p>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+          </div>
+          <div>
+            <p class="cert-name">Certificate of Participation</p>
+            <p class="cert-issuer">Hackster 2025</p>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+          </div>
+          <div>
+            <p class="cert-name">Certificate of Participation</p>
+            <p class="cert-issuer">CaseForge 2025 Case Study Competition · Unstop</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Devika</span>
+  <span class="footer-text">© 2026 · Full Stack Developer · IIIT Senapati</span>
+  <span class="footer-text">sonidevika080@gmail.com</span>
+</footer>
+
+</body>
+</html>
